@@ -11,6 +11,13 @@ using namespace std;
 
 
 void leer_entrada(set<string> &S){
+   ifstream fe("data/claus");
+   string key;
+   while(!fe.eof()) {
+      fe >> key;
+      S.insert(key);
+   }
+   fe.close();
 }
 
 void K_funciones(&set<string> S) {
