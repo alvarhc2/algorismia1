@@ -1,6 +1,7 @@
 #include <iostream>
 #include <set>
 #include <string>
+#include <fstream>
 #include <map>
 #include "sha256.h"
 #include "Bloom_s.h"
@@ -20,7 +21,7 @@ void leer_entrada(set<string> &S){
    fe.close();
 }
 
-void K_funciones(&set<string> S) {
+void K_funciones(set<string> &S) {
 	int prob = 0;
 	int op;
 	while (prob <= 0 or prob >= 1000) {
@@ -40,19 +41,38 @@ void K_funciones(&set<string> S) {
 	cout <<"1 - Polinómica con coeficientes aleatorios (Explicada en clase)"<<endl;
 	cout <<"2 - Tabulation Hashing"<<endl;
 	cin >> op;
+	map<string, list<unsigned int> > m;
 	if(op == 1) {
 		Hash h(prob, S);
-		map<string, list<unsigned int> > m = h.hashFuncFam();
-		Bloom_K(m, h.get_m());
+		m = h.hashFuncFam();
+		Bloom_K B = Bloom_K(m, h.get_m());
+		int contador=0, steps=0;
+		string key;
+		while (cin >> key) {
+			if (B.falso_positivo(key, h.hashFuncFamKey(key))) ++contador;
+			++steps;
+		}
+		cout <<"Cantidad de falsos positivos: "<<contador<<endl;
+		double porcentaje = (double)contador /(double)steps *100;
+		cout <<"Porcentaje de falsos positivos: "<< porcentaje <<"%"<<endl;
 	}
 	else {
 		Tab_hash h (prob, S);
-		map<string, list<unsigned int> > m = h.tabHashFuncFam();
-		Bloom_K(m, h.get_m());
+		m = h.tabHashFuncFam();
+		Bloom_K B = Bloom_K(m, h.get_m());			
+		int contador=0, steps=0;
+		string key;
+		while (cin >> key) {
+			if (B.falso_positivo(key, h.tabHashFuncFamKey(key))) ++contador;
+			++steps;
+		}
+		cout <<"Cantidad de falsos positivos: "<<contador<<endl;
+		double porcentaje = (double)contador /(double)steps *100;
+		cout <<"Porcentaje de falsos positivos: "<< porcentaje <<"%"<<endl;
 	}
 }
 
-void SHA(&set<string> S) {
+void SHA(set<string> &S) {
 	map<string, string> m;
 	for(set<string>::iterator i = S.begin(); i!= S.end(); ++i) {
 		string key = *i;
@@ -61,6 +81,15 @@ void SHA(&set<string> S) {
 	}
 	Bloom_s B;
 	B.insertar_elementos(m);
+	int contador=0, steps=0;
+	string key;
+	while (cin >> key) {
+		if (B.falso_positivo(key)) ++contador;
+	   ++steps;
+	}
+	cout <<"Cantidad de falsos positivos: "<<contador<<endl;
+	double porcentaje = (double)contador /(double)steps *100;
+	cout <<"Porcentaje de falsos positivos: "<< porcentaje <<"%"<<endl;
 }
 
 
