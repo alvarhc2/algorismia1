@@ -10,7 +10,7 @@ Bloom_s::Bloom_s(){}
 void Bloom_s::insertar_elementos(map<string,string> m){
    for(map<string,string>::iterator i = m.begin(); i != m.end(); ++i){
 		pair<string,string> p = *i;
-		m[p.first]=m[p.second];
+		M[p.second]=true;
 		elementos.insert(p.first);
 	}
 }
