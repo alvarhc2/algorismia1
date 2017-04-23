@@ -6,6 +6,7 @@
 #include "Bloom_s.h"
 #include "Hash.h"
 #include "Tab_hash.h"
+#include "Bloom_K.h"
 using namespace std;
 
 
@@ -35,10 +36,12 @@ void K_funciones(set<string> S) {
 	if(op == 1) {
 		Hash h(prob, S);
 		map<string, list<unsigned int> > m = h.hashFuncFam();
+		Bloom_K(m, h.get_m);
 	}
 	else {
 		Tab_hash h (prob, S);
 		map<string, list<unsigned int> > m = h.tabHashFuncFam();
+		Bloom_K(m, h.get_m);
 	}
 }
 
