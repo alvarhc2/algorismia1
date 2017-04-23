@@ -4,6 +4,8 @@
 #include <map>
 #include "sha256.h"
 #include "Bloom_s.h"
+#include "Hash.h"
+#include "Tab_hash.h"
 using namespace std;
 
 
@@ -31,6 +33,12 @@ void K_funciones(set<string> S) {
 	cout <<"2 - Tabulation Hashing"<<endl;
 	cin >> op;
 	if(op == 1) {
+		Hash h(prob, S);
+		map<string, list<unsigned int> > m = h.hashFuncFam();
+	}
+	else {
+		Tab_hash h (prob, S);
+		map<string, list<unsigned int> > m = h.tabHashFuncFam();
 	}
 }
 
