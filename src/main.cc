@@ -13,7 +13,7 @@ using namespace std;
 void leer_entrada(set<string> &S){
 }
 
-void K_funciones(set<string> S) {
+void K_funciones(&set<string> S) {
 	int prob = 0;
 	int op;
 	while (prob <= 0 or prob >= 1000) {
@@ -36,16 +36,16 @@ void K_funciones(set<string> S) {
 	if(op == 1) {
 		Hash h(prob, S);
 		map<string, list<unsigned int> > m = h.hashFuncFam();
-		Bloom_K(m, h.get_m);
+		Bloom_K(m, h.get_m());
 	}
 	else {
 		Tab_hash h (prob, S);
 		map<string, list<unsigned int> > m = h.tabHashFuncFam();
-		Bloom_K(m, h.get_m);
+		Bloom_K(m, h.get_m());
 	}
 }
 
-void SHA(set<string> S) {
+void SHA(&set<string> S) {
 	map<string, string> m;
 	for(set<string>::iterator i = S.begin(); i!= S.end(); ++i) {
 		string key = *i;
