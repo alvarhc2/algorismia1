@@ -31,6 +31,6 @@ bool Bloom_K::falso_positivo(string key, list<unsigned int> l) {
 	}
 	if(negative) return false;
 	else {
-		return elementos.find(key) != elementos.end();
+		return elementos.find(key) == elementos.end();
 	}
 }
