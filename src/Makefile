@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------
 
-SOURCE=main.cc Hash.cc Tab_hash.cc Bloom_K.cc
+SOURCE=main.cc Hash.cc Tab_hash.cc Bloom_K.cc sha256.cc Bloom_s.cc
 MYPROGRAM=practicaAlg
 
 CC=g++
