@@ -9,13 +9,13 @@ CC=g++
 
 
 
-all: $(MYPROGRAM)
+all: MYPROGRAM
 
 
 
-$(MYPROGRAM): $(SOURCE)
+MYPROGRAM: $(SOURCE)
 
-	$(CC) $(SOURCE) -o$(MYPROGRAM)
+	$(CC) $(SOURCE) -o $(MYPROGRAM)
 
 clean:
 
